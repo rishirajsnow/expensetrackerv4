@@ -264,3 +264,7 @@ canvas{
   height:300px !important;
 
 }
+
+.my-green {
+  background-color: green;
+}

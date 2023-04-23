@@ -53,7 +53,7 @@ class AddExpense {
     //show view function that returns the html of adding expense form
     getViewHTML() {
         return `
-        <div class="container">
+        <div class="container my-green">
             <div class="row">
                 <div class="col-md-6">
                     <h2>Add Expense</h2>

@@ -7,14 +7,12 @@ class PieChartView {
     }
 
     notify() {
-        debugger;
         this.render();
     }
 
     render() {
         const categories = this.models.categoryModel.getCategories();
         const expenses = this.models.expenseModel.getExpenses();
-        debugger;
         const data = [];
         const labels = [];
         categories.forEach(category => {
