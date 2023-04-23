@@ -2,6 +2,7 @@ class StateManager {
     constructor () {
         this.state = {};
         this.subscribers = [];
+        this.stores = [];
         this.wasUpdated = false;
         this.upstream = null;
     }
@@ -16,7 +17,8 @@ class StateManager {
 
     setState(key, value) {
         this.state[key] = value;
-        this.subscribers.forEach(subscriber => subscriber.setState(this.state));
+        this.stores.forEach(store => store.setState(this.state));
+        this.subscribers.forEach(subscriber => typeof subscriber.notify === "function" ? subscriber.notify(): console.warn("The subscriber cannot take notifications"));
         this.wasUpdated = true;
     }
 
@@ -32,8 +34,19 @@ class StateManager {
         this.upstream = upstream;
     }
 
+    addStore(store) {
+        this.stores.push(store);
+    }
+
+    removeStore(store) {
+        this.stores = this.stores.filter(s => s !== store);
+    }
+
     init() {
         this.state = this.upstream.getState();
+        if (this.state === null) {
+            this.state = {};
+        }
     }
 }
 
