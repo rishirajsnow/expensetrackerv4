@@ -3,8 +3,7 @@ import StateManager from "./StateManager";
 import StoreAdapter from "./StoreAdapter";
 import ExpenseManager from "./ExpenseManager";
 class LifeCycleManager {
-    constructor() {        
-    }
+   
     initModels() {
         this.statemanager = new StateManager();
         this.storeadapter = new StoreAdapter();

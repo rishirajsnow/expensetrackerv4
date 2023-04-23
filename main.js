@@ -8,18 +8,19 @@ import PieChartView from './views/PieChartView'
 //two divs left and right 
 
 document.querySelector('#app').innerHTML = `
+    <header>    
+      <h2>Expense Tracker</h2>
+    </header> 
   <div>
-    <header>Expense Tracker</header>
-    <div id="add-expense"></div>
     <canvas id="pie-chart"></canvas>
+    <div id="add-expense"></div>
   </div>
 `
-
-
 const lifeCycleManager = new LifeCycleManager();
 lifeCycleManager.initModels();
 const addExpense = lifeCycleManager.initViews(document.getElementById("add-expense"), AddExpense);
 const addPieChart = lifeCycleManager.initViews(document.getElementById("pie-chart"), PieChartView);
 addExpense.setView();
 addPieChart.render();
-// setupCounter(document.querySelector('#counter'))
+
+

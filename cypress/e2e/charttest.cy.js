@@ -1,4 +1,4 @@
-describe('template spec', () => {
+describe('Add expense from input tests', () => {
   beforeEach(() => {
     cy.visit('http://127.0.0.1:5173')
   })

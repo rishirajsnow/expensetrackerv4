@@ -17,7 +17,7 @@ class PieChartView {
         const labels = [];
         categories.forEach(category => {
             const categoryExpenses = expenses.filter(expense => expense.category === category.id);
-            const total = categoryExpenses.reduce((acc, cur) => acc + cur.amount, 0);
+            const total = categoryExpenses.reduce((acc, cur) => acc + Number(cur.amount), 0);
             data.push(total);
             labels.push(category.name);
         });

@@ -31,7 +31,12 @@ class AddExpense {
         document.getElementById("expense-date").value = "";
         document.getElementById("expense-category").value = "";
     }
-
+    getExpenses(){
+        let x= this.expenseModel.getExpenses();
+         let total=x.reduce((acc, cur) => acc + Number(cur.amount), 0);
+        return total;
+    }
+    
     getCategories() {
         //get categories from category manager and render options html
         const categories = this.categoryModel.getCategories();
@@ -39,24 +44,45 @@ class AddExpense {
             return `<option value="${category.id}">${category.name}</option>`
         }).join("");
     }
+   
+    
     setView() {
         this.element.innerHTML = this.getViewHTML();
         this.bindEvents();
     }
     //button onclick call addExpense function'
+    
     bindEvents() {
         document.getElementById("add-expense-form").addEventListener("submit", (e) => {
             e.preventDefault();
+            const text = document.getElementById('expense-name');
+            const amount = document.getElementById('expense-amount');
+            const date = document.getElementById("expense-date");
+            const category=document.getElementById("expense-category");
+            const total=document.getElementById("total");
+            //Validation of input
+            if (text.value.trim() === '' || amount.value.trim() === '') {
+                alert('Please add a text and amount');
+            } 
+            if (date.value.trim() === '') {
+                alert('Please enter date');
+            } 
+            if (category.value.trim() === '') {
+                alert('Please category of expense');
+            } 
             this.addExpense();
+            //Update total expenses post each update
+            total.innerText=`dd Expense: $ ${this.getExpenses()}(Total Expences)`;
+            
         })
     }
     //show view function that returns the html of adding expense form
     getViewHTML() {
         return `
-        <div class="container my-green">
+        <div class="container">
+        <b id="total">Add Expense: $ ${this.getExpenses()}(Total Expences)</b>
             <div class="row">
                 <div class="col-md-6">
-                    <h2>Add Expense</h2>
                     <form id="add-expense-form">
                         <div class="form-group">
                             <label for="expense-name">Expense Name</label>
@@ -72,7 +98,7 @@ class AddExpense {
                         </div>
                         <div class="form-group">
                             <label for="expense-category">Expense Category</label>
-                            <select class="form-control" id="expense-category">
+                            <select type="category" class="form-control" id="expense-category">
                                 <option value="">Select Category</option>
                                 ${this.getCategories()}
                             </select>
